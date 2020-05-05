@@ -1,0 +1,21 @@
+<?php
+	$mob=$_POST['mob'];
+	$pass=$_POST['pwd'];
+	$con=mysqli_connect("localhost","root","","test");
+	$querry="select * from register where Mobile='$mob' AND Password='$pass'";
+	$res=mysqli_query($con,$querry);
+	$x=mysqli_num_rows($res);
+	if($x==1)
+	{
+	while($row=mysqli_fetch_array($res))
+	{
+		session_start();
+		$_SESSION['name']=$row['Name'];
+	}
+	header('Location:NEW_BMS_HOME.php');
+	}
+	else
+	{ 	
+		header('Location:BMS_LOGIN.html');
+	}
+?>
